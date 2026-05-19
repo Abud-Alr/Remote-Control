@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Remote Stunt Car Controller — Control a 3D stunt car from your phone in real-time multiplayer">
+  <title>Remote Stunt Car Controller</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/landing.css">
+</head>
+<body class="landing">
+  <div class="landing-container">
+    <div class="landing-icon">🏎️</div>
+    <h1 class="landing-title">Remote Stunt Car</h1>
+    <p class="landing-subtitle">
+      Use your phone as a controller to drive a 3D stunt car on the big screen.<br>
+      Up to 4 players — race, jump, and boost in real-time!
+    </p>
+
+    <div class="role-cards">
+      <a href="/game.html" class="role-card card-game" id="card-game">
+        <span class="role-icon">🖥️</span>
+        <div class="role-label">Game Screen</div>
+        <p class="role-desc">Open on desktop or TV to display the 3D stunt track</p>
+      </a>
+
+      <a href="/controller.html" class="role-card card-controller" id="card-controller">
+        <span class="role-icon">📱</span>
+        <div class="role-label">Controller</div>
+        <p class="role-desc">Open on your phone to steer, boost, and jump</p>
+      </a>
+    </div>
+
+    <div class="connection-info">
+      <p>Connect from another device using:</p>
+      <div class="ip-display" id="ip-display">loading...</div>
+    </div>
+  </div>
+
+  <script>
+    // Show the server URL for other devices to connect
+    const ipDisplay = document.getElementById('ip-display');
+    const host = window.location.host;
+    const protocol = window.location.protocol;
+    ipDisplay.textContent = `${protocol}//${host}`;
+
+    // Auto-suggest role based on device
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    if (isMobile) {
+      document.getElementById('card-controller').style.order = '-1';
+    }
+  </script>
+</body>
+</html>

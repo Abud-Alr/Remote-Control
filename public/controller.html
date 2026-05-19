@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Remote Stunt Car Controller — Phone gamepad">
+  <title>Controller — Remote Stunt Car</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/controller.css">
+</head>
+<body class="controller-body">
+
+  <!-- Header -->
+  <div class="controller-header">
+    <div class="player-badge">
+      <span class="player-color-dot" id="player-dot"></span>
+      <span id="player-name">Connecting...</span>
+    </div>
+    <div class="connection-status">
+      <span class="status-dot" id="status-dot"></span>
+      <span id="status-text">Connecting</span>
+    </div>
+  </div>
+
+  <!-- Main Controls -->
+  <div class="controls-area">
+    <!-- Joystick (Left) -->
+    <div class="joystick-zone" id="joystick-zone">
+      <div class="joystick-base" id="joystick-base"></div>
+      <div class="joystick-thumb" id="joystick-thumb"></div>
+      <span class="joystick-label">Move</span>
+    </div>
+
+    <!-- Score / Timer (Center) -->
+    <div class="score-display">
+      <div>
+        <span class="score-value" id="score-value">0</span>
+        <span> pts</span>
+      </div>
+      <div>
+        <span class="timer-value" id="timer-value">3:00</span>
+      </div>
+    </div>
+
+    <!-- Buttons (Right) -->
+    <div class="buttons-zone">
+      <button class="action-btn btn-boost" id="btn-boost" type="button">
+        <span class="btn-icon">🔥</span>
+        Boost
+      </button>
+      <button class="action-btn btn-jump" id="btn-jump" type="button">
+        <span class="btn-icon">⬆️</span>
+        Jump
+      </button>
+      <button class="action-btn btn-flip" id="btn-flip" type="button">
+        <span class="btn-icon">🔄</span>
+        Flip
+      </button>
+    </div>
+  </div>
+
+  <!-- Waiting Overlay -->
+  <div class="waiting-overlay" id="waiting-overlay">
+    <div class="waiting-spinner"></div>
+    <div class="waiting-text">Connecting to server...</div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/socket-events.js"></script>
+  <script src="js/controller.js"></script>
+</body>
+</html>

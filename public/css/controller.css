@@ -1,0 +1,305 @@
+/* ── Controller (Mobile) ─────────────────────────────────────── */
+body.controller-body {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  overflow: hidden;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  background:
+    radial-gradient(ellipse at 30% 60%, rgba(108, 92, 231, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 30%, rgba(0, 206, 209, 0.1) 0%, transparent 50%),
+    linear-gradient(160deg, #1a1a3e 0%, #2d1b4e 50%, #1a2a4e 100%);
+}
+
+/* ── Header Bar ──────────────────────────────────────────────── */
+.controller-header {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-md);
+  z-index: 10;
+  background: rgba(20, 20, 50, 0.6);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.player-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.player-color-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.connection-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+/* ── Controls Layout ─────────────────────────────────────────── */
+.controls-area {
+  position: absolute;
+  top: 44px; left: 0; right: 0; bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+}
+
+/* ── Joystick ────────────────────────────────────────────────── */
+.joystick-zone {
+  position: relative;
+  width: 170px;
+  height: 170px;
+  flex-shrink: 0;
+}
+
+.joystick-base {
+  position: absolute;
+  top: 0; left: 0;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.2), 0 0 20px rgba(108, 92, 231, 0.1);
+  pointer-events: none;
+}
+
+.joystick-thumb {
+  position: absolute;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.06) 100%);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: box-shadow var(--transition-fast);
+  pointer-events: none;
+}
+
+.joystick-thumb.active {
+  border-color: #6c5ce7;
+  box-shadow:
+    0 0 20px rgba(108, 92, 231, 0.4),
+    0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.joystick-label {
+  position: absolute;
+  bottom: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  pointer-events: none;
+}
+
+/* ── Action Buttons ──────────────────────────────────────────── */
+.buttons-zone {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  flex-shrink: 0;
+}
+
+.action-btn {
+  position: relative;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255,255,255,0.06);
+  color: var(--text-primary);
+  font-family: var(--font-main);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.action-btn .btn-icon {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.action-btn:active {
+  transform: scale(0.92);
+}
+
+/* Boost Button */
+.btn-boost {
+  border-color: rgba(255, 165, 0, 0.4);
+  background: rgba(255, 165, 0, 0.08);
+}
+
+.btn-boost:active,
+.btn-boost.active {
+  background: rgba(255, 165, 0, 0.25);
+  border-color: #ffa500;
+  box-shadow:
+    0 0 25px rgba(255, 165, 0, 0.35),
+    inset 0 0 15px rgba(255, 165, 0, 0.15);
+  color: #ffa500;
+}
+
+/* Jump Button */
+.btn-jump {
+  border-color: rgba(0, 206, 209, 0.4);
+  background: rgba(0, 206, 209, 0.08);
+}
+
+.btn-jump:active,
+.btn-jump.active {
+  background: rgba(0, 206, 209, 0.25);
+  border-color: #00ced1;
+  box-shadow:
+    0 0 25px rgba(0, 206, 209, 0.35),
+    inset 0 0 15px rgba(0, 206, 209, 0.15);
+  color: #00ced1;
+}
+
+/* Flip Button */
+.btn-flip {
+  border-color: rgba(108, 92, 231, 0.4);
+  background: rgba(108, 92, 231, 0.08);
+}
+
+.btn-flip:active,
+.btn-flip.active {
+  background: rgba(108, 92, 231, 0.25);
+  border-color: #6c5ce7;
+  box-shadow:
+    0 0 25px rgba(108, 92, 231, 0.35),
+    inset 0 0 15px rgba(108, 92, 231, 0.15);
+  color: #6c5ce7;
+}
+
+/* ── Score Display ───────────────────────────────────────────── */
+.score-display {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.score-value {
+  font-weight: 700;
+  color: #00ced1;
+  font-size: 1.1rem;
+}
+
+.timer-value {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Waiting Overlay ─────────────────────────────────────────── */
+.waiting-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(20, 20, 50, 0.92);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  gap: var(--space-lg);
+  text-align: center;
+  padding: var(--space-xl);
+}
+
+.waiting-overlay.hidden {
+  display: none;
+  pointer-events: none;
+}
+
+.waiting-spinner {
+  width: 48px;
+  height: 48px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: #6c5ce7;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.waiting-text {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-height: 400px) {
+  .joystick-zone, .joystick-base {
+    width: 130px;
+    height: 130px;
+  }
+  .joystick-thumb {
+    width: 52px;
+    height: 52px;
+  }
+  .action-btn {
+    width: 70px;
+    height: 70px;
+    font-size: 0.55rem;
+  }
+  .action-btn .btn-icon { font-size: 1.1rem; }
+  .buttons-zone { gap: 4px; }
+}
+
+@media (max-width: 400px) {
+  .joystick-zone, .joystick-base {
+    width: 130px;
+    height: 130px;
+  }
+  .joystick-thumb {
+    width: 52px;
+    height: 52px;
+  }
+  .action-btn {
+    width: 75px;
+    height: 75px;
+  }
+}

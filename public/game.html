@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Remote Stunt Car — 3D Game Screen">
+  <title>Game — Remote Stunt Car</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/game.css">
+</head>
+<body class="game-body">
+  <!-- Three.js Canvas -->
+  <canvas id="game-canvas"></canvas>
+
+  <!-- HUD -->
+  <div class="hud">
+    <div class="hud-top">
+      <!-- Leaderboard -->
+      <div class="hud-panel hud-leaderboard" id="hud-leaderboard">
+        <h3>Players</h3>
+        <div id="leaderboard-list">
+          <div class="leaderboard-entry" style="color: var(--text-dim);">
+            Waiting for players...
+          </div>
+        </div>
+      </div>
+
+      <!-- Timer -->
+      <div class="hud-panel hud-timer" id="hud-timer">
+        <div class="timer-label">Time Left</div>
+        <div class="timer-value" id="game-timer">3:00</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Speed HUD -->
+  <div class="hud-panel hud-speed" id="hud-speed">
+    <span class="speed-value" id="speed-value">0</span>
+    <span class="speed-unit">km/h</span>
+  </div>
+
+  <!-- Waiting Screen -->
+  <div class="game-waiting" id="game-waiting">
+    <div class="waiting-icon">🏎️</div>
+    <h2>Waiting for Controllers</h2>
+    <p>Open the controller on your phone by navigating to:</p>
+    <div class="ip-display" id="game-ip-display" style="margin: 8px 0;">loading...</div>
+    <p>Then tap <strong>"Controller"</strong></p>
+    <div class="connected-players" id="connected-players">
+      <div class="player-slot" data-slot="0">?</div>
+      <div class="player-slot" data-slot="1">?</div>
+      <div class="player-slot" data-slot="2">?</div>
+      <div class="player-slot" data-slot="3">?</div>
+    </div>
+  </div>
+
+  <!-- Round End Overlay -->
+  <div class="round-end-overlay" id="round-end-overlay">
+    <h2>🏁 Round Over!</h2>
+    <div class="final-scores" id="final-scores"></div>
+    <button class="restart-btn" id="restart-btn">Play Again</button>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/socket-events.js"></script>
+
+  <!-- Three.js & Cannon-es via CDN (ES module compatible builds) -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/",
+      "cannon-es": "https://cdn.jsdelivr.net/npm/cannon-es@0.20.0/dist/cannon-es.js"
+    }
+  }
+  </script>
+  <script type="module" src="js/game.js"></script>
+</body>
+</html>
